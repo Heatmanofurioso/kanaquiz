@@ -1,12 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html {
   height: 100%;   /* height sets are for android chrome background fix */
   min-height: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
   min-height: 100%;
   font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
   background-color: #e5e5e5;
   color: #111;
+}
+.list-disc.list-inside {
+  //https://css-tricks.com/everything-you-need-to-know-about-the-gap-after-the-list-marker/
+  list-style-type: "• ";
+}
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
 }
 .outercontainer {
   background-color: #f5f5f5;

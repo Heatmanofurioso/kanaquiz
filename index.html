@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <style>
-      .app-update {
-        display: none;
-        position: fixed;
-        bottom: 0;
-        background: #d9534f;
-        border: 1px #b42c27 solid;
-        color: #fff;
-        min-height: 50px;
-        border-radius: 5px;
-        width: 100%;
-      }
-      .app-update.show { display: block; }
-      .avoidwrap { display: inline-block; }
-    </style>
-    <title>Kanji Pro: Learn hiragana & katakana & Kanji fast and easy</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="Description" content="Application for studying hiragana & katakana characters.">
-  </head>
-  <body>
-    <div id="app"></div>
+    <head>
+        <style>
+            .app-update {
+                display: none;
+                position: fixed;
+                bottom: 0;
+                background: #d9534f;
+                border: 1px #b42c27 solid;
+                color: #fff;
+                min-height: 50px;
+                border-radius: 5px;
+                width: 100%;
+            }
 
-    <button id="app-update" class="app-update">
-      <span class="avoidwrap">New version is available!</span>
-      <span class="avoidwrap">Click here to update.</span>
-    </button>
+            .app-update.show {
+                display: block;
+            }
 
-    <script
-      defer
-      async
-      src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"
-    ></script>
-  </body>
+            .avoidwrap {
+                display: inline-block;
+            }
+        </style>
+        <title>Kanji Pro: Learn hiragana & katakana & Kanji fast and easy</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="Description" content="Application for studying hiragana & katakana characters.">
+    </head>
+    <body>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="root"></div>
+        <script type="module" src="/src/index.jsx"></script>
+    </body>
 </html>

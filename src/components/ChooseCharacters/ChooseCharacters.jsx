@@ -206,7 +206,7 @@ class ChooseCharacters extends Component {
       return (<div className="col-sm-6">
         <div className="panel panel-default">
           <div className="panel-heading">{kana}</div>
-          <div className="panel-body selection-areas">
+          <div className="p-5 selection-areas">
             {this.showGroupRows(kana, this.state.showAlternatives.indexOf(kana) >= 0, this.state.showSimilars.indexOf(kana) >= 0)}
           </div>
           <div className="panel-footer text-center">
@@ -222,17 +222,17 @@ class ChooseCharacters extends Component {
   render() {
     return (
       <div className="choose-characters">
-        <div className="row">
+        <div className="">
           <div className="col-xs-12">
             <div className="panel panel-default">
-              <div className="panel-body welcome">
+              <div className="p-5 welcome">
                 <h4>Welcome to Kanji Pro!</h4>
                 <p>Please choose the groups of characters that you'd like to be studying.</p>
               </div>
             </div>
           </div>
         </div>
-        <div className="row">
+        <div className="">
           {this.makeDivs()}
           <div className="col-sm-3 col-xs-12 pull-right">
             <span className="pull-right lock">Lock to stage &nbsp;
