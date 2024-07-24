@@ -41,13 +41,13 @@ export function findRomajisAtKanaKey(needle, kanaDictionary) {
 //             }, this);
 //         }, this);
 //     }, this);
-//     return type;       
+//     return type;
 // }
 
 export function shuffle(array) {
-  var i = 0
+  let i = 0
     , j = 0
-    , temp = null
+    , temp = null;
 
   for (i = array.length - 1; i > 0; i -= 1) {
     j = Math.floor(Math.random() * (i + 1))
@@ -58,7 +58,7 @@ export function shuffle(array) {
 }
 
 export function removeHash() {
-  var loc = window.location;
+  const loc = window.location;
   if ("pushState" in history)
     history.replaceState("", document.title, loc.pathname + loc.search);
 
@@ -73,15 +73,15 @@ export function cartesianProduct(elements) {
     throw new TypeError();
   }
 
-  var end = elements.length - 1,
+  const end = elements.length - 1,
     result = [];
 
   function addTo(curr, start) {
-    var first = elements[start],
+    const first = elements[start],
       last = (start === end);
 
-    for (var i = 0; i < first.length; ++i) {
-      var copy = curr.slice();
+    for (let i = 0; i < first.length; ++i) {
+      const copy = curr.slice();
       copy.push(first[i]);
 
       if (last) {

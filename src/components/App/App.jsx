@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.scss';
 import Navbar from '../Navbar/Navbar';
 import GameContainer from '../GameContainer/GameContainer';
-import { removeHash } from '../../data/helperFuncs';
 
 const options = {};
 

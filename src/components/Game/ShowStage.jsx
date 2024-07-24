@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './ShowStage.scss';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
 class ShowStage extends Component {
   state = {

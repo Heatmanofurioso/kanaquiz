@@ -41,7 +41,7 @@ class ChooseCharacters extends Component {
   scrollToStart() {
     if (this.startRef) {
       const rect = this.startRef.getBoundingClientRect();
-      const absTop = rect.top + window.pageYOffset;
+      const absTop = rect.top + window.scrollY;
       const scrollPos = absTop - window.innerHeight + 50;
       window.scrollTo(0, scrollPos > 0 ? scrollPos : 0);
     }
