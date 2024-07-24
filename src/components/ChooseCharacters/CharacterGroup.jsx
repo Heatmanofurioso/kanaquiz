@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class CharacterGroup extends Component {
-  state = { shownChars: '' }
+  state = {shownChars: ''}
 
   changeShownChars(newString) {
     this.setState({shownChars: newString})
@@ -12,12 +12,12 @@ class CharacterGroup extends Component {
     let strKanaCharacters = '';
     Object.keys(this.props.characters).map(character => {
       const romajiString = this.props.characters[character].join('/')
-      strRomajiCharacters+=romajiString+' · ';
-      strKanaCharacters+=character+' · ';
+      strRomajiCharacters += romajiString + ' · ';
+      strKanaCharacters += character + ' · ';
     });
     strRomajiCharacters = strRomajiCharacters.slice(0, -2);
     strKanaCharacters = strKanaCharacters.slice(0, -2);
-    if(whichKana=='romaji') return strRomajiCharacters;
+    if (whichKana == 'romaji') return strRomajiCharacters;
     else return strKanaCharacters;
   }
 
@@ -28,23 +28,23 @@ class CharacterGroup extends Component {
   render() {
     return (
       <div
-      className={
-        'choose-row'
+        className={
+          'choose-row'
           + (this.props.groupName.endsWith('_a') || this.props.groupName.endsWith('_s') ? ' alt-row' : '')
-          + (['h_group16_a','k_group18_a','k_group29_a'].includes(this.props.groupName) ? ' divider-row' : '')
-      }
-      onClick={() => {
-        this.props.handleToggleSelect(this.props.groupName);
-        this.changeShownChars(this.getShowableCharacters('romaji'));
-      }}
-      onMouseEnter={()=>this.changeShownChars(this.getShowableCharacters('kana'))}
-      onMouseLeave={()=>this.changeShownChars(this.getShowableCharacters('romaji'))}
-      onTouchStart={()=>this.changeShownChars(this.getShowableCharacters('kana'))}
-      onTouchEnd={()=>this.changeShownChars(this.getShowableCharacters('romaji'))}
-    >
+          + (['h_group16_a', 'k_group18_a', 'k_group29_a'].includes(this.props.groupName) ? ' divider-row' : '')
+        }
+        onClick={() => {
+          this.props.handleToggleSelect(this.props.groupName);
+          this.changeShownChars(this.getShowableCharacters('romaji'));
+        }}
+        onMouseEnter={() => this.changeShownChars(this.getShowableCharacters('kana'))}
+        onMouseLeave={() => this.changeShownChars(this.getShowableCharacters('romaji'))}
+        onTouchStart={() => this.changeShownChars(this.getShowableCharacters('kana'))}
+        onTouchEnd={() => this.changeShownChars(this.getShowableCharacters('romaji'))}
+      >
       <span className={this.props.selected ?
-          'glyphicon glyphicon-small glyphicon-check' :
-          'glyphicon glyphicon-small glyphicon-unchecked'}></span> {this.state.shownChars}
+        'glyphicon glyphicon-small glyphicon-check' :
+        'glyphicon glyphicon-small glyphicon-unchecked'}></span> {this.state.shownChars}
       </div>
     );
   }

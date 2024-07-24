@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
-import { kanaDictionary } from '../../data/kanaDictionary';
-import { quizSettings } from '../../data/quizSettings';
+import React, {Component} from 'react';
+import {kanaDictionary} from '../../data/kanaDictionary';
+import {quizSettings} from '../../data/quizSettings';
 import {
-  findRomajisAtKanaKey, removeFromArray, arrayContains, shuffle, cartesianProduct,
-  getRandomFromArray, intersection
+  arrayContains,
+  cartesianProduct,
+  findRomajisAtKanaKey,
+  getRandomFromArray,
+  intersection,
+  removeFromArray,
+  shuffle
 } from '../../data/helperFuncs';
 import './Question.scss';
 
@@ -63,8 +68,7 @@ class Question extends Component {
       randomizedKanas = randomizedKanas.slice(0, amount - 1); // -1 so we have room to add included
       randomizedKanas.push(include);
       shuffle(randomizedKanas);
-    }
-    else {
+    } else {
       shuffle(randomizedKanas);
       randomizedKanas = randomizedKanas.slice(0, amount);
     }
@@ -78,7 +82,7 @@ class Question extends Component {
       numberOfKanas = 3;
     }
     this.currentQuestion = this.getRandomKanas(numberOfKanas, false, this.previousQuestion);
-    this.setState({ currentQuestion: this.currentQuestion });
+    this.setState({currentQuestion: this.currentQuestion});
     this.setAnswerOptions();
     this.setAllowedAnswers();
     // console.log(this.currentQuestion);
@@ -86,7 +90,7 @@ class Question extends Component {
 
   setAnswerOptions() {
     this.answerOptions = this.getRandomKanas(3, this.currentQuestion[0], false);
-    this.setState({ answerOptions: this.answerOptions });
+    this.setState({answerOptions: this.answerOptions});
     // console.log(this.answerOptions);
   }
 
@@ -114,9 +118,9 @@ class Question extends Component {
   handleAnswer = answer => {
     if (this.props.stage <= 2) document.activeElement.blur(); // reset answer button's :active
     this.previousQuestion = this.currentQuestion;
-    this.setState({ previousQuestion: this.previousQuestion });
+    this.setState({previousQuestion: this.previousQuestion});
     this.previousAnswer = answer;
-    this.setState({ previousAnswer: this.previousAnswer });
+    this.setState({previousAnswer: this.previousAnswer});
     this.previousAllowedAnswers = this.allowedAnswers;
     if (this.isInAllowedAnswers(this.previousAnswer)) {
       this.stageProgress = this.stageProgress + 1;
@@ -130,9 +134,10 @@ class Question extends Component {
       previousAnswerWasCorrect: this.previousAnswerWasCorrect
     });
     if (this.stageProgress >= quizSettings.stageLength[this.props.stage] && !this.props.isLocked) {
-      setTimeout(() => { this.props.handleStageUp() }, 300);
-    }
-    else
+      setTimeout(() => {
+        this.props.handleStageUp()
+      }, 300);
+    } else
       this.setNewQuestion();
   }
 
@@ -189,7 +194,8 @@ class Question extends Component {
       if (this.state.previousAnswerWasCorrect)
         resultString = (
           <div className="previous-result correct" title="Correct answer!">
-            <span className="pull-left glyphicon glyphicon-none"></span>{rightAnswer}<span className="pull-right glyphicon glyphicon-ok"></span>
+            <span className="pull-left glyphicon glyphicon-none"></span>{rightAnswer}<span
+            className="pull-right glyphicon glyphicon-ok"></span>
           </div>
         );
       else
@@ -214,14 +220,14 @@ class Question extends Component {
   }
 
   handleAnswerChange = e => {
-    this.setState({ currentAnswer: e.target.value.replace(/\s+/g, '') });
+    this.setState({currentAnswer: e.target.value.replace(/\s+/g, '')});
   }
 
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.currentAnswer != '') {
       this.handleAnswer(this.state.currentAnswer.toLowerCase());
-      this.setState({ currentAnswer: '' });
+      this.setState({currentAnswer: ''});
     }
   }
 
@@ -238,7 +244,7 @@ class Question extends Component {
     if ('ontouchstart' in window)
       btnClass += " no-hover"; // disables hover effect on touch screens
     let stageProgressPercentage = Math.round((this.state.stageProgress / quizSettings.stageLength[this.props.stage]) * 100) + '%';
-    let stageProgressPercentageStyle = { width: stageProgressPercentage }
+    let stageProgressPercentageStyle = {width: stageProgressPercentage}
     return (
       <div className="text-center question col-xs-12">
         {this.getPreviousResult()}
@@ -248,25 +254,26 @@ class Question extends Component {
             this.props.stage < 3 ?
               this.state.answerOptions.map((answer, idx) => {
                 return <AnswerButton answer={answer}
-                  className={btnClass}
-                  key={idx}
-                  answertype={this.getAnswerType()}
-                  handleAnswer={this.handleAnswer} />
+                                     className={btnClass}
+                                     key={idx}
+                                     answertype={this.getAnswerType()}
+                                     handleAnswer={this.handleAnswer}/>
               })
               : <div className="answer-form-container">
                 <form onSubmit={this.handleSubmit}>
-                  <input autoFocus className="answer-input" type="text" value={this.state.currentAnswer} onChange={this.handleAnswerChange} />
+                  <input autoFocus className="answer-input" type="text" value={this.state.currentAnswer}
+                         onChange={this.handleAnswerChange}/>
                 </form>
               </div>
           }
         </div>
         <div className="progress">
           <div className="progress-bar progress-bar-info"
-            role="progressbar"
-            aria-valuenow={this.state.stageProgress}
-            aria-valuemin="0"
-            aria-valuemax={quizSettings.stageLength[this.props.stage]}
-            style={stageProgressPercentageStyle}
+               role="progressbar"
+               aria-valuenow={this.state.stageProgress}
+               aria-valuemin="0"
+               aria-valuemax={quizSettings.stageLength[this.props.stage]}
+               style={stageProgressPercentageStyle}
           >
             <span>Stage {this.props.stage} {this.props.isLocked ? ' (Locked)' : ''}</span>
           </div>
@@ -290,8 +297,10 @@ class AnswerButton extends Component {
 
   render() {
     return (
-      <button className={this.props.className} onClick={() => this.props.handleAnswer(this.getShowableAnswer())}>{this.getShowableAnswer()}</button>
+      <button className={this.props.className}
+              onClick={() => this.props.handleAnswer(this.getShowableAnswer())}>{this.getShowableAnswer()}</button>
     );
   }
 }
+
 export default Question;

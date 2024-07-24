@@ -1,4 +1,4 @@
-import { Workbox } from "workbox-window";
+import {Workbox} from "workbox-window";
 
 //TODO:
 //https://vite-pwa-org.netlify.app/guide/register-service-worker.html
@@ -17,7 +17,7 @@ if ("serviceWorker" in navigator) {
 
         // Send a message telling the service worker to skip waiting.
         // This will trigger the `controlling` event handler above.
-        wb.messageSW({ type: "SKIP_WAITING" });
+        wb.messageSW({type: "SKIP_WAITING"});
       });
     });
 

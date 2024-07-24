@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Switch from 'react-toggle-switch';
-import { kanaDictionary } from '../../data/kanaDictionary';
+import {kanaDictionary} from '../../data/kanaDictionary';
 import './ChooseCharacters.scss';
 import CharacterGroup from './CharacterGroup';
 
@@ -32,9 +32,9 @@ class ChooseCharacters extends Component {
     if (this.startRef) {
       const rect = this.startRef.getBoundingClientRect();
       if (rect.y > window.innerHeight && this.state.startIsVisible)
-        this.setState({ startIsVisible: false });
+        this.setState({startIsVisible: false});
       else if (rect.y <= window.innerHeight && !this.state.startIsVisible)
-        this.setState({ startIsVisible: true });
+        this.setState({startIsVisible: true});
     }
   }
 
@@ -60,11 +60,11 @@ class ChooseCharacters extends Component {
       return;
     let newSelectedGroups = this.state.selectedGroups.slice();
     newSelectedGroups.splice(this.getIndex(groupName), 1);
-    this.setState({ selectedGroups: newSelectedGroups });
+    this.setState({selectedGroups: newSelectedGroups});
   }
 
   addSelect(groupName) {
-    this.setState({ errMsg: '', selectedGroups: this.state.selectedGroups.concat(groupName) });
+    this.setState({errMsg: '', selectedGroups: this.state.selectedGroups.concat(groupName)});
   }
 
   toggleSelect = groupName => {
@@ -85,7 +85,7 @@ class ChooseCharacters extends Component {
       ))
         newSelectedGroups.push(groupName);
     });
-    this.setState({ errMsg: '', selectedGroups: newSelectedGroups });
+    this.setState({errMsg: '', selectedGroups: newSelectedGroups});
   }
 
   selectNone(whichKana, altOnly = false, similarOnly = false) {
@@ -103,7 +103,7 @@ class ChooseCharacters extends Component {
       if (!mustBeRemoved)
         newSelectedGroups.push(groupName);
     });
-    this.setState({ selectedGroups: newSelectedGroups });
+    this.setState({selectedGroups: newSelectedGroups});
   }
 
   toggleAlternative(whichKana, postfix) {
@@ -114,9 +114,9 @@ class ChooseCharacters extends Component {
     else
       show.push(whichKana)
     if (postfix == '_a')
-      this.setState({ showAlternatives: show });
+      this.setState({showAlternatives: show});
     if (postfix == '_s')
-      this.setState({ showSimilars: show });
+      this.setState({showSimilars: show});
   }
 
   getSelectedAlternatives(whichKana, postfix) {
@@ -195,7 +195,7 @@ class ChooseCharacters extends Component {
 
   startGame() {
     if (this.state.selectedGroups.length < 1) {
-      this.setState({ errMsg: 'Choose at least one group!' });
+      this.setState({errMsg: 'Choose at least one group!'});
       return;
     }
     this.props.handleStartGame(this.state.selectedGroups);
@@ -210,8 +210,9 @@ class ChooseCharacters extends Component {
             {this.showGroupRows(kana, this.state.showAlternatives.indexOf(kana) >= 0, this.state.showSimilars.indexOf(kana) >= 0)}
           </div>
           <div className="panel-footer text-center">
-            <a href="javascript:;" onClick={() => this.selectAll(kana)}>All</a> &nbsp;&middot;&nbsp; <a href="javascript:;"
-              onClick={() => this.selectNone(kana)}>None</a>
+            <a href="javascript:;" onClick={() => this.selectAll(kana)}>All</a> &nbsp;&middot;&nbsp; <a
+            href="javascript:;"
+            onClick={() => this.selectNone(kana)}>None</a>
             &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={() => this.selectAll(kana, true)}>All alternative</a>
             &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={() => this.selectNone(kana, true)}>No alternative</a>
           </div>
@@ -219,6 +220,7 @@ class ChooseCharacters extends Component {
       </div>);
     });
   }
+
   render() {
     return (
       <div className="choose-characters">
@@ -239,22 +241,24 @@ class ChooseCharacters extends Component {
               {
                 this.props.isLocked &&
                 <input className="stage-choice" type="number" min="1" max="4" maxLength="1" size="1"
-                  onChange={(e) => this.props.lockStage(e.target.value, true)}
-                  value={this.props.stage}
+                       onChange={(e) => this.props.lockStage(e.target.value, true)}
+                       value={this.props.stage}
                 />
               }
-              <Switch onClick={() => this.props.lockStage(1)} on={this.props.isLocked} /></span>
+              <Switch onClick={() => this.props.lockStage(1)} on={this.props.isLocked}/></span>
           </div>
           <div className="col-sm-offset-3 col-sm-6 col-xs-12 text-center">
             {
               this.state.errMsg != '' &&
               <div className="error-message">{this.state.errMsg}</div>
             }
-            <button ref={c => this.startRef = c} className="btn btn-danger startgame-button" onClick={() => this.startGame()}>Start the Quiz!</button>
+            <button ref={c => this.startRef = c} className="btn btn-danger startgame-button"
+                    onClick={() => this.startGame()}>Start the Quiz!
+            </button>
           </div>
           <div className="down-arrow"
-            style={{ display: this.state.startIsVisible ? 'none' : 'block' }}
-            onClick={(e) => this.scrollToStart(e)}
+               style={{display: this.state.startIsVisible ? 'none' : 'block'}}
+               onClick={(e) => this.scrollToStart(e)}
           >
             Start
           </div>
