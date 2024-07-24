@@ -8,7 +8,9 @@ if ("serviceWorker" in navigator) {
     const updateButton = document.querySelector("#app-update");
     // Fires when the registered service worker has installed but is waiting to activate.
     wb.addEventListener("waiting", (event) => {
+      // @ts-ignore
       updateButton.classList.add("show");
+      // @ts-ignore
       updateButton.addEventListener("click", () => {
         // Set up a listener that will reload the page as soon as the previously waiting service worker has taken control.
         wb.addEventListener("controlling", (event) => {

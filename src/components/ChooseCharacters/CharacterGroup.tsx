@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 
-class CharacterGroup extends Component {
+class CharacterGroup extends Component<any, any> {
   state = {shownChars: ''}
 
-  changeShownChars(newString) {
+  changeShownChars(newString: string) {
     this.setState({shownChars: newString})
   }
 
-  getShowableCharacters(whichKana) {
+  getShowableCharacters(whichKana: string) {
     let strRomajiCharacters = '';
     let strKanaCharacters = '';
     Object.keys(this.props.characters).map(character => {
@@ -17,8 +17,11 @@ class CharacterGroup extends Component {
     });
     strRomajiCharacters = strRomajiCharacters.slice(0, -2);
     strKanaCharacters = strKanaCharacters.slice(0, -2);
-    if (whichKana == 'romaji') return strRomajiCharacters;
-    else return strKanaCharacters;
+    if (whichKana == 'romaji') {
+      return strRomajiCharacters;
+    } else {
+      return strKanaCharacters;
+    }
   }
 
   componentWillMount() {

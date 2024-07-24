@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './Navbar.scss';
 
-class Navbar extends Component {
+class Navbar extends Component<any, any> {
   render() {
     return (
       <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
