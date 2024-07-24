@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open --env.mode development --host 0.0.0.0 --config webpack.config.js",
     "mobile": "webpack-dev-server --open --env.mode development --host 0.0.0.0 --public 192.168.1.8:8080",
-    "build": "webpack --env.mode production --config webpack.config.prod.js"
+    "build": "webpack --env.mode production --config webpack.config.prod.js",
+    "lint": "prettier --write **/*.{js,jsx}"
+
   },
   "repository": {
     "type": "git",
@@ -37,6 +39,7 @@
     "postcss": "^7.0.5",
     "postcss-loader": "^3.0.0",
     "precss": "^3.1.2",
+    "prettier": "^2.8.4",
     "react-hot-loader": "^4.3.12",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
@@ -47,7 +50,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "lodash.template": "^4.5.0",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
