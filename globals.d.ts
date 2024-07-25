@@ -3,17 +3,6 @@ declare module '*.svg' {
   export default content;
 }
 
-declare module 'spel2js';
+declare module 'react-toggle-switch';
 
-declare module 'react-tabs-scrollable';
-
-declare module '*.graphql' {
-  import { DocumentNode } from 'graphql';
-
-  const value: DocumentNode;
-  export = value;
-}
-
-declare module 'tinymce';
-
-declare module 'eventsourcemock';
+declare module 'react-transition-group';

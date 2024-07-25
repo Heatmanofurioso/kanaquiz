@@ -5,7 +5,7 @@ import GameContainer from '../GameContainer/GameContainer';
 
 const options = {};
 
-class App extends Component {
+class App extends Component<any, any> {
     state = {gameState: 'chooseCharacters'};
 
     startGame = () => {
@@ -16,19 +16,25 @@ class App extends Component {
         this.setState({gameState: 'chooseCharacters'});
     }
 
-    componentWillUpdate(nextProps, nextState) {
+    componentWillUpdate(nextProps: any, nextState: any) {
         // This is primarily for demo site purposes. Hides #footer when game is on.
         if (document.getElementById('footer')) {
             if (nextState.gameState == 'chooseCharacters')
-                document.getElementById('footer').style.display = "block";
+                { // @ts-ignore
+                  document.getElementById('footer').style.display = "block";
+                }
             else
-                document.getElementById('footer').style.display = "none";
+                { // @ts-ignore
+                  document.getElementById('footer').style.display = "none";
+                }
         }
     }
 
     componentWillMount() {
         if (document.getElementById('footer'))
-            document.getElementById('footer').style.display = "block";
+            { // @ts-ignore
+              document.getElementById('footer').style.display = "block";
+            }
     }
 
     render() {

@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import './ShowStage.scss';
+// @ts-ignore
 import {CSSTransition} from 'react-transition-group';
 
-class ShowStage extends Component {
+class ShowStage extends Component<any, any> {
+  timeoutID: any;
   state = {
     show: false,
     entered: false
@@ -27,7 +29,7 @@ class ShowStage extends Component {
 
   showStage() {
     let stageDescription;
-    let stageSecondaryDescription = false;
+    let stageSecondaryDescription: any = false;
 
     if (this.props.stage === 1) stageDescription = 'Choose one';
     else if (this.props.stage === 2) {
@@ -71,7 +73,7 @@ class ShowStage extends Component {
 
     return (
       <CSSTransition classNames="stage" timeout={{enter: 900, exit: 900}} in={show} unmountOnExit>
-        {state => content}
+        {(state: any) => content}
       </CSSTransition>
     );
   }

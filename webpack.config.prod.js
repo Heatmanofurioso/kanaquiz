@@ -24,7 +24,7 @@ module.exports = {
       inject: false,
     }),
     new WorkboxWebpackPlugin.InjectManifest({
-      swSrc: "./src/src-sw.js",
+      swSrc: "./src/src-sw.ts",
       swDest: "sw.js",
     }),
   ],

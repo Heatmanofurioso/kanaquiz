@@ -3,11 +3,11 @@ import ChooseCharacters from '../ChooseCharacters/ChooseCharacters';
 import Game from '../Game/Game';
 import {sanitizeStage} from '../../data/helperFuncs';
 
-class GameContainer extends Component {
+class GameContainer extends Component<any, any> {
   state = {
     stage: 1,
     isLocked: false,
-    decidedGroups: JSON.parse(localStorage.getItem('decidedGroups') || null) || []
+    decidedGroups: JSON.parse(localStorage.getItem('decidedGroups') || '[]') || []
   }
 
   componentWillReceiveProps() {
@@ -15,7 +15,7 @@ class GameContainer extends Component {
       this.setState({stage: 1});
   }
 
-  startGame = decidedGroups => {
+  startGame = (decidedGroups: any) => {
     this.setState({decidedGroups: decidedGroups});
     localStorage.setItem('decidedGroups', JSON.stringify(decidedGroups));
     this.props.handleStartGame();
@@ -25,7 +25,7 @@ class GameContainer extends Component {
     this.setState({stage: this.state.stage + 1});
   }
 
-  lockStage = (stage, forceLock) => {
+  lockStage = (stage: any, forceLock: any) => {
     stage = sanitizeStage(stage);
     // if(stage<1 || stage>5) stage=1; // don't use this to allow backspace
     if (forceLock)

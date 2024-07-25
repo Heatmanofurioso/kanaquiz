@@ -14,7 +14,7 @@ import './Question.scss';
 
 const kana_count = 3;
 
-class Question extends Component {
+class Question extends Component<any, any> {
   state = {
     previousQuestion: [],
     previousAnswer: '',
@@ -24,13 +24,24 @@ class Question extends Component {
     answerOptions: [],
     stageProgress: 0
   }
+  askableKanaKeys: any;
+  currentQuestion: any;
+  previousQuestion: any;
+  previousAnswer: any;
+  answerOptions: any;
+  allowedAnswers: any;
   // this.setNewQuestion = this.setNewQuestion.bind(this);
   // this.handleAnswer = this.handleAnswer.bind(this);
   // this.handleAnswerChange = this.handleAnswerChange.bind(this);
   // this.handleSubmit = this.handleSubmit.bind(this);
   // }
+  previousAnswerWasCorrect: any;
+  stageProgress: any;
+  private previousAllowedAnswers: any;
+  private askableKanas: any;
+  private askableRomajis: any;
 
-  getRandomKanas(amount, include, exclude) {
+  getRandomKanas(amount: any, include: any, exclude: any) {
     let randomizedKanas = this.askableKanaKeys.slice();
 
     if (exclude && exclude.length > 0) {
@@ -50,17 +61,17 @@ class Question extends Component {
 
       // let's remove kanas that have the same answer as included
       let searchFor = findRomajisAtKanaKey(include, kanaDictionary);
-      randomizedKanas = randomizedKanas.filter(character => {
+      randomizedKanas = randomizedKanas.filter((character: any) => {
         return intersection(searchFor, findRomajisAtKanaKey(character, kanaDictionary));
       });
 
       // now let's remove "duplicate" kanas (if two kanas have same answers)
       let tempRandomizedKanas = randomizedKanas.slice();
-      randomizedKanas = randomizedKanas.filter(r => {
+      randomizedKanas = randomizedKanas.filter((r: any) => {
         let dupeFound = false;
         searchFor = findRomajisAtKanaKey(r, kanaDictionary);
         tempRandomizedKanas.shift();
-        tempRandomizedKanas.forEach(w => {
+        tempRandomizedKanas.forEach((w: any) => {
           return intersection(findRomajisAtKanaKey(w, kanaDictionary), searchFor) > 0;
         });
         return !dupeFound;
@@ -106,9 +117,9 @@ class Question extends Component {
     else if (this.props.stage === 2)
       this.allowedAnswers = this.currentQuestion;
     else if (this.props.stage === 4 || this.props.stage === 5) {
-      let tempAllowedAnswers = [];
+      let tempAllowedAnswers: any = [];
 
-      this.currentQuestion.forEach(key => {
+      this.currentQuestion.forEach((key: any) => {
         tempAllowedAnswers.push(findRomajisAtKanaKey(key, kanaDictionary));
       });
 
@@ -119,7 +130,8 @@ class Question extends Component {
     // console.log(this.allowedAnswers);
   }
 
-  handleAnswer = answer => {
+  handleAnswer = (answer: any) => {
+    // @ts-ignore
     if (this.props.stage <= 2) document.activeElement.blur(); // reset answer button's :active
     this.previousQuestion = this.currentQuestion;
     this.setState({previousQuestion: this.previousQuestion});
@@ -137,6 +149,7 @@ class Question extends Component {
       stageProgress: this.stageProgress,
       previousAnswerWasCorrect: this.previousAnswerWasCorrect
     });
+    // @ts-ignore
     if (this.stageProgress >= quizSettings.stageLength[this.props.stage] && !this.props.isLocked) {
       setTimeout(() => {
         this.props.handleStageUp()
@@ -184,7 +197,7 @@ class Question extends Component {
   }
 
   getPreviousResult() {
-    let resultString = '';
+    let resultString: any = '';
     // console.log(this.previousAnswer);
     if (this.previousQuestion == '')
       resultString = <div className="previous-result none">Let's go! Which character is this?</div>
@@ -215,7 +228,7 @@ class Question extends Component {
     return resultString;
   }
 
-  isInAllowedAnswers(previousAnswer) {
+  isInAllowedAnswers(previousAnswer: any) {
     console.log(previousAnswer);
     console.log(this.allowedAnswers);
     if (arrayContains(previousAnswer, this.previousAllowedAnswers))
@@ -223,11 +236,11 @@ class Question extends Component {
     else return false;
   }
 
-  handleAnswerChange = e => {
+  handleAnswerChange = (e: any) => {
     this.setState({currentAnswer: e.target.value.replace(/\s+/g, '')});
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e: any) => {
     e.preventDefault();
     if (this.state.currentAnswer != '') {
       this.handleAnswer(this.state.currentAnswer.toLowerCase());
@@ -247,8 +260,10 @@ class Question extends Component {
     let btnClass = "btn btn-default answer-button";
     if ('ontouchstart' in window)
       btnClass += " no-hover"; // disables hover effect on touch screens
+    // @ts-ignore
     let stageProgressPercentage = Math.round((this.state.stageProgress / quizSettings.stageLength[this.props.stage]) * 100) + '%';
     let stageProgressPercentageStyle = {width: stageProgressPercentage}
+    // @ts-ignore
     return (
       <div className="text-center question col-xs-12">
         {this.getPreviousResult()}
@@ -257,6 +272,7 @@ class Question extends Component {
           {
             this.props.stage < 3 ?
               this.state.answerOptions.map((answer, idx) => {
+                // @ts-ignore
                 return <AnswerButton answer={answer}
                                      className={btnClass}
                                      key={idx}
@@ -276,6 +292,7 @@ class Question extends Component {
                role="progressbar"
                aria-valuenow={this.state.stageProgress}
                aria-valuemin="0"
+            // @ts-ignore
                aria-valuemax={quizSettings.stageLength[this.props.stage]}
                style={stageProgressPercentageStyle}
           >
@@ -290,18 +307,23 @@ class Question extends Component {
 
 class AnswerButton extends Component {
   getShowableAnswer() {
+    // @ts-ignore
     if (this.props.answertype === 'romaji') {
+      // @ts-ignore
       const possibleAnswers = findRomajisAtKanaKey(this.props.answer, kanaDictionary);
       // get random romajis from the list of array to show as option
       return getRandomFromArray(possibleAnswers);
     } else {
+      // @ts-ignore
       return this.props.answer;
     }
   }
 
   render() {
     return (
+      // @ts-ignore
       <button className={this.props.className}
+        // @ts-ignore
               onClick={() => this.props.handleAnswer(this.getShowableAnswer())}>{this.getShowableAnswer()}</button>
     );
   }

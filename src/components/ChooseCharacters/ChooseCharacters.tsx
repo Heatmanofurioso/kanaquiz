@@ -4,8 +4,9 @@ import {kanaDictionary} from '../../data/kanaDictionary';
 import './ChooseCharacters.scss';
 import CharacterGroup from './CharacterGroup';
 
-class ChooseCharacters extends Component {
-  state = {
+class ChooseCharacters extends Component<any, any> {
+  startRef: any;
+  state: any = {
     errMsg: '',
     selectedGroups: this.props.selectedGroups,
     showAlternatives: [],
@@ -24,7 +25,7 @@ class ChooseCharacters extends Component {
     window.removeEventListener('scroll', this.testIsStartVisible);
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: any, prevState: any) {
     this.testIsStartVisible();
   }
 
@@ -38,7 +39,7 @@ class ChooseCharacters extends Component {
     }
   }
 
-  scrollToStart() {
+  scrollToStart(event: any) {
     if (this.startRef) {
       const rect = this.startRef.getBoundingClientRect();
       const absTop = rect.top + window.scrollY;
@@ -47,15 +48,15 @@ class ChooseCharacters extends Component {
     }
   }
 
-  getIndex(groupName) {
+  getIndex(groupName: any) {
     return this.state.selectedGroups.indexOf(groupName);
   }
 
-  isSelected(groupName) {
+  isSelected(groupName: any) {
     return this.getIndex(groupName) > -1 ? true : false;
   }
 
-  removeSelect(groupName) {
+  removeSelect(groupName: any) {
     if (this.getIndex(groupName) < 0)
       return;
     let newSelectedGroups = this.state.selectedGroups.slice();
@@ -63,18 +64,18 @@ class ChooseCharacters extends Component {
     this.setState({selectedGroups: newSelectedGroups});
   }
 
-  addSelect(groupName) {
+  addSelect(groupName: any) {
     this.setState({errMsg: '', selectedGroups: this.state.selectedGroups.concat(groupName)});
   }
 
-  toggleSelect = groupName => {
+  toggleSelect = (groupName: any) => {
     if (this.getIndex(groupName) > -1)
       this.removeSelect(groupName);
     else
       this.addSelect(groupName);
   }
 
-  selectAll(whichKana, altOnly = false, similarOnly = false) {
+  selectAll(whichKana: any, altOnly = false, similarOnly = false) {
     const thisKana = kanaDictionary[whichKana];
     let newSelectedGroups = this.state.selectedGroups.slice();
     Object.keys(thisKana).forEach(groupName => {
@@ -88,9 +89,9 @@ class ChooseCharacters extends Component {
     this.setState({errMsg: '', selectedGroups: newSelectedGroups});
   }
 
-  selectNone(whichKana, altOnly = false, similarOnly = false) {
-    let newSelectedGroups = [];
-    this.state.selectedGroups.forEach(groupName => {
+  selectNone(whichKana: any, altOnly = false, similarOnly = false) {
+    let newSelectedGroups: any = [];
+    this.state.selectedGroups.forEach((groupName:any) => {
       let mustBeRemoved = false;
       Object.keys(kanaDictionary[whichKana]).forEach(removableGroupName => {
         if (removableGroupName === groupName && (
@@ -106,8 +107,8 @@ class ChooseCharacters extends Component {
     this.setState({selectedGroups: newSelectedGroups});
   }
 
-  toggleAlternative(whichKana, postfix) {
-    let show = postfix == '_a' ? this.state.showAlternatives : this.state.showSimilars;
+  toggleAlternative(whichKana: string, postfix: any) {
+    let show: any = postfix == '_a' ? this.state.showAlternatives : this.state.showSimilars;
     const idx = show.indexOf(whichKana);
     if (idx >= 0)
       show.splice(idx, 1);
@@ -119,20 +120,20 @@ class ChooseCharacters extends Component {
       this.setState({showSimilars: show});
   }
 
-  getSelectedAlternatives(whichKana, postfix) {
-    return this.state.selectedGroups.filter(groupName => {
+  getSelectedAlternatives(whichKana: any, postfix: any) {
+    return this.state.selectedGroups.filter((groupName: any) => {
       return groupName.startsWith(whichKana == 'hiragana' ? 'h_' : 'k_') &&
         groupName.endsWith(postfix);
     }).length;
   }
 
-  getAmountOfAlternatives(whichKana, postfix) {
+  getAmountOfAlternatives(whichKana: any, postfix: any) {
     return Object.keys(kanaDictionary[whichKana]).filter(groupName => {
       return groupName.endsWith(postfix);
     }).length;
   }
 
-  alternativeToggleRow(whichKana, postfix, show) {
+  alternativeToggleRow(whichKana: any, postfix: any, show: any) {
     let checkBtn = "glyphicon glyphicon-small glyphicon-"
     let status;
     if (this.getSelectedAlternatives(whichKana, postfix) >= this.getAmountOfAlternatives(whichKana, postfix))
@@ -169,9 +170,9 @@ class ChooseCharacters extends Component {
     </div>
   }
 
-  showGroupRows(whichKana, showAlternatives, showSimilars = false) {
+  showGroupRows(whichKana: any, showAlternatives: any, showSimilars = false) {
     const thisKana = kanaDictionary[whichKana];
-    let rows = [];
+    let rows: any = [];
     Object.keys(thisKana).forEach((groupName, idx) => {
       if (groupName == "h_group11_a" || groupName == "k_group13_a")
         rows.push(this.alternativeToggleRow(whichKana, "_a", showAlternatives));
@@ -202,7 +203,7 @@ class ChooseCharacters extends Component {
   }
 
   makeDivs() {
-    return Object.keys(kanaDictionary).map(kana => {
+    return Object.keys(kanaDictionary).map((kana: any) => {
       return (<div className="col-sm-6">
         <div className="panel panel-default">
           <div className="panel-heading">{kana}</div>
@@ -240,6 +241,7 @@ class ChooseCharacters extends Component {
             <span className="pull-right lock">Lock to stage &nbsp;
               {
                 this.props.isLocked &&
+                // @ts-ignore
                 <input className="stage-choice" type="number" min="1" max="5" maxLength="1" size="1"
                        onChange={(e) => this.props.lockStage(e.target.value, true)}
                        value={this.props.stage}
@@ -258,7 +260,7 @@ class ChooseCharacters extends Component {
           </div>
           <div className="down-arrow"
                style={{display: this.state.startIsVisible ? 'none' : 'block'}}
-               onClick={(e) => this.scrollToStart(e)}
+               onClick={(e: any) => this.scrollToStart(e)}
           >
             Start
           </div>

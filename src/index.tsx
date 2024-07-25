@@ -1,12 +1,14 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from "./components/App/App";
+import reportWebVitals from "./reportWebVitals";
 
-let appEl = document.getElementById("app");
-if (!appEl) {
-  // in case of old index.html in cache
-  appEl = document.querySelector(".app");
-}
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+reportWebVitals();

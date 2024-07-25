@@ -9,6 +9,7 @@ import cssnano from "cssnano";
 const targets = [">0.10%", "not dead"];
 
 // https://vitejs.dev/config/
+// @ts-ignore
 export default ({ mode }) => {
     console.log("running at: %s mode", mode);
 

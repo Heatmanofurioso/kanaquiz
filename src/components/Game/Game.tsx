@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ShowStage from './ShowStage';
 import Question from './Question';
 
-class Game extends Component {
+class Game extends Component<any, any> {
   state = {showScreen: ''}
 
   componentWillMount() {
@@ -14,7 +14,7 @@ class Game extends Component {
     this.setState({showScreen: 'stage'});
   }
 
-  lockStage = stage => {
+  lockStage = (stage: any) => {
     this.setState({showScreen: 'question'});
     this.props.lockStage(stage);
   }
