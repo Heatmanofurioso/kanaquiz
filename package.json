@@ -7,18 +7,20 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "vite",
     "lint": "prettier --write **/*.{js,jsx}",
-    "build": "vite build"
+    "build": "vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anzzstuff/kanaquiz.git"
+    "url": "git+https://github.com/heatmanofurioso/kanaquiz.git"
   },
   "author": "Antti Pilto",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/anzzstuff/kanaquiz/issues"
+    "url": "https://github.com/heatmanofurioso/kanaquiz/issues"
   },
-  "homepage": ".",
+  "homepage": "https://heatmanofurioso.github.io/kanaquiz",
   "browserslist": [
     ">0.10%",
     "not dead"
@@ -30,6 +32,7 @@
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
     "cssnano": "^7.0.4",
+    "gh-pages": "^6.1.1",
     "postcss": "^8.4.39",
     "prettier": "^3.3.3",
     "sass": "^1.77.8",

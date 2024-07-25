@@ -12,6 +12,8 @@ import {
 } from '../../data/helperFuncs';
 import './Question.scss';
 
+const kana_count = 3;
+
 class Question extends Component {
   state = {
     previousQuestion: [],
@@ -79,7 +81,9 @@ class Question extends Component {
   setNewQuestion() {
     let numberOfKanas = 1;
     if (this.props.stage === 4) {
-      numberOfKanas = 3;
+      numberOfKanas = kana_count;
+    } else if (this.props.stage === 5) {
+      numberOfKanas = kana_count + 5;
     }
     this.currentQuestion = this.getRandomKanas(numberOfKanas, false, this.previousQuestion);
     this.setState({currentQuestion: this.currentQuestion});
@@ -89,7 +93,7 @@ class Question extends Component {
   }
 
   setAnswerOptions() {
-    this.answerOptions = this.getRandomKanas(3, this.currentQuestion[0], false);
+    this.answerOptions = this.getRandomKanas(kana_count, this.currentQuestion[0], false);
     this.setState({answerOptions: this.answerOptions});
     // console.log(this.answerOptions);
   }
@@ -101,7 +105,7 @@ class Question extends Component {
       this.allowedAnswers = findRomajisAtKanaKey(this.currentQuestion, kanaDictionary);
     else if (this.props.stage === 2)
       this.allowedAnswers = this.currentQuestion;
-    else if (this.props.stage === 4) {
+    else if (this.props.stage === 4 || this.props.stage === 5) {
       let tempAllowedAnswers = [];
 
       this.currentQuestion.forEach(key => {

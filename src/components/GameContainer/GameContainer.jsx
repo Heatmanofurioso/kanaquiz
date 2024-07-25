@@ -27,7 +27,7 @@ class GameContainer extends Component {
 
   lockStage = (stage, forceLock) => {
     stage = sanitizeStage(stage);
-    // if(stage<1 || stage>4) stage=1; // don't use this to allow backspace
+    // if(stage<1 || stage>5) stage=1; // don't use this to allow backspace
     if (forceLock)
       this.setState({stage: stage, isLocked: true});
     else

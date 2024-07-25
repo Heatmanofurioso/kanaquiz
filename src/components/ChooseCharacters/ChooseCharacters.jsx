@@ -210,11 +210,11 @@ class ChooseCharacters extends Component {
             {this.showGroupRows(kana, this.state.showAlternatives.indexOf(kana) >= 0, this.state.showSimilars.indexOf(kana) >= 0)}
           </div>
           <div className="panel-footer text-center">
-            <a href="javascript:;" onClick={() => this.selectAll(kana)}>All</a> &nbsp;&middot;&nbsp; <a
-            href="javascript:;"
+            <a href="#" onClick={() => this.selectAll(kana)}>All</a> &nbsp;&middot;&nbsp; <a
+            href="#"
             onClick={() => this.selectNone(kana)}>None</a>
-            &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={() => this.selectAll(kana, true)}>All alternative</a>
-            &nbsp;&middot;&nbsp; <a href="javascript:;" onClick={() => this.selectNone(kana, true)}>No alternative</a>
+            &nbsp;&middot;&nbsp; <a href="#" onClick={() => this.selectAll(kana, true)}>All alternative</a>
+            &nbsp;&middot;&nbsp; <a href="#" onClick={() => this.selectNone(kana, true)}>No alternative</a>
           </div>
         </div>
       </div>);
@@ -240,7 +240,7 @@ class ChooseCharacters extends Component {
             <span className="pull-right lock">Lock to stage &nbsp;
               {
                 this.props.isLocked &&
-                <input className="stage-choice" type="number" min="1" max="4" maxLength="1" size="1"
+                <input className="stage-choice" type="number" min="1" max="5" maxLength="1" size="1"
                        onChange={(e) => this.props.lockStage(e.target.value, true)}
                        value={this.props.stage}
                 />

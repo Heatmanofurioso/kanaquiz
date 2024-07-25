@@ -108,7 +108,7 @@ export function intersection(a, b) {
 export const sanitizeStage = (stage) => {
   if (parseInt(stage) < 1 || isNaN(parseInt(stage))) {
     return STAGE_FIRST;
-  } else if (parseInt(stage) > 4) {
+  } else if (parseInt(stage) > 5) {
     return STAGE_LAST;
   } else {
     return parseInt(stage);

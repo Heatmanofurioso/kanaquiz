@@ -86,6 +86,7 @@ export const kanaDictionary: any = {
         'ノ': ['no']
       }
     },
+    'k_group12': { characters: { 'シ': ['shi','si'], 'ツ': ['tsu','tu'], 'ソ': ['so'], 'ン': ['n'], 'ノ': ['no'] } },
     'k_group12_s': {
       characters: {
         'ウ': ['u'],
