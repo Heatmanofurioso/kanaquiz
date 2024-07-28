@@ -14,11 +14,11 @@ export default ({ mode }) => {
     console.log("running at: %s mode", mode);
 
     return defineConfig({
-        base: 'https://heatmanofurioso.github.io/kanaquiz/',
+        base: '/kanaquiz/',
         plugins: [
             react({
                 include: "**/*.{js,jsx}",
-                jsxRuntime: "classic",
+                jsxRuntime: "automatic",
             }),
             legacy({
                 targets,
