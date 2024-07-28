@@ -14,6 +14,7 @@ export default ({ mode }) => {
     console.log("running at: %s mode", mode);
 
     return defineConfig({
+        base: 'https://heatmanofurioso.github.io/kanaquiz/',
         plugins: [
             react({
                 include: "**/*.{js,jsx}",
