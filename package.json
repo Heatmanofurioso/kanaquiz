@@ -2,7 +2,7 @@
   "name": "kanaquiz",
   "version": "2.1.0",
   "description": "Application for studying hiragana & katakana characters.",
-  "main": "index.jsx",
+  "main": "index.tsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "vite",
@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/heatmanofurioso/kanaquiz/issues"
   },
-  "homepage": "https://heatmanofurioso.github.io/kanaquiz",
+  "homepage": "https://heatmanofurioso.github.io/kanaquiz/",
   "browserslist": [
     ">0.10%",
     "not dead"
