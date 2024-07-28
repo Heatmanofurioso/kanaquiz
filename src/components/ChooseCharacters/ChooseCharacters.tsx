@@ -243,6 +243,7 @@ class ChooseCharacters extends Component<any, any> {
                 this.props.isLocked &&
                 // @ts-ignore
                 <input className="stage-choice" type="number" min="1" max="5" maxLength="1" size="1"
+                       inputMode="numeric"
                        onChange={(e) => this.props.lockStage(e.target.value, true)}
                        value={this.props.stage}
                 />
