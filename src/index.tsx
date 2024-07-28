@@ -4,11 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-reportWebVitals();
+const rootElement = document.getElementById('root');
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+} else {
+  console.error('Root element not found');
+}

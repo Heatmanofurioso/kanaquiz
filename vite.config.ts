@@ -9,12 +9,14 @@ import cssnano from "cssnano";
 const targets = [">0.10%", "not dead"];
 
 // https://vitejs.dev/config/
-// @ts-ignore
 export default ({ mode }) => {
     console.log("running at: %s mode", mode);
 
+    // Set base URL based on the mode
+    const base = mode === 'production' ? '/kanaquiz/' : '/';
+
     return defineConfig({
-        base: '/kanaquiz/',
+        base: base, // Use the base URL based on the mode
         plugins: [
             react({
                 include: "**/*.{js,jsx}",

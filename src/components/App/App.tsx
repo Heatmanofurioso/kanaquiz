@@ -16,7 +16,7 @@ class App extends Component<any, any> {
         this.setState({gameState: 'chooseCharacters'});
     }
 
-    componentWillUpdate(nextProps: any, nextState: any) {
+    componentDidUpdate(nextProps: any, nextState: any) {
         // This is primarily for demo site purposes. Hides #footer when game is on.
         if (document.getElementById('footer')) {
             if (nextState.gameState == 'chooseCharacters')
@@ -30,7 +30,7 @@ class App extends Component<any, any> {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         if (document.getElementById('footer'))
             { // @ts-ignore
               document.getElementById('footer').style.display = "block";

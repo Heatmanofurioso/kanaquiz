@@ -8,6 +8,7 @@
     "start": "vite",
     "lint": "prettier --write **/*.{js,jsx, tsx, ts, css}",
     "build": "vite build",
+    "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
