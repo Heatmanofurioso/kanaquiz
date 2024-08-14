@@ -252,7 +252,6 @@ class ChooseCharacters extends Component<IChooseCharactersProps, any> {
                 {
                   this.props.isLocked &&
                 <input  type="number" min="1" max="5"
-                        inputMode="numeric"
                         onChange={(e) => this.props.lockStage(e.target.value, true)}
                         value={this.props.stage}/>
                 }
