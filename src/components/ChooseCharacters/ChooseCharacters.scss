@@ -8,26 +8,38 @@
   }
 }
 
+.col-sm-6 {
+  float: left;
+}
+
+.col-sm-6:nth-child(even) {
+  padding-left: 15px;
+}
+
+.col-sm-6:nth-child(odd) {
+  padding-right: 15px;
+}
+
 .choose-characters {
-  .panel-heading {
+  .card-header {
     font-weight: bold;
   }
 
-  .panel-heading span {
+  .card-header span {
     color: #aaa;
   }
 
-  .panel-footer a {
+  .card-footer a {
     text-decoration: none;
-    color: #337ab7;
+    color: #0d6efd; // Updated for Bootstrap 5
   }
 
-  .choose-row {
+  .list-group-item {
     font-size: 1em;
     padding: 5px;
   }
 
-  .choose-row:not(:last-child) {
+  .list-group-item:not(:last-child) {
     border-bottom: 1px #eee solid;
   }
 
@@ -45,33 +57,30 @@
   }
 
   @media (min-width: 768px) {
-    .choose-row:hover {
+    .list-group-item-action:hover {
       background-color: #f4f4f4;
     }
   }
 
-  .choose-row:hover {
+  .list-group-item-action:hover {
     cursor: pointer;
   }
 
-  .glyphicon {
-    font-size: 0.9em;
-  }
-
-  .glyphicon-check {
+  // Replace glyphicon with Font Awesome or SVG icons
+  .fa-check {
     color: green;
   }
 
-  .glyphicon-check.half {
+  .fa-check.half {
     color: #ccc;
   }
 
-  .glyphicon-unchecked {
+  .fa-circle {
     color: #ccc;
   }
 
   .selection-areas {
-    padding: 7px;
+    padding: 7px !important;
   }
 
   .success-percent {
@@ -87,6 +96,7 @@
 .lock {
   color: #888;
   margin-bottom: 10px;
+  display: -webkit-box;
 }
 
 .stage-choice {
@@ -97,44 +107,7 @@
   outline: none;
 }
 
-.switch {
-  border: 1px solid #ccc;
-  background: #e5e5e5;
-  width: 44px;
-  height: 19px;
-  border-radius: 13px;
-  cursor: pointer;
-  display: block;
-  float: right;
-  margin-top: 1px;
-}
-
-.switch-toggle {
-  border: 1px solid #999;
-  box-shadow: 1px 1px 1px #ccc;
-  width: 19px;
-  height: 17px;
-  left: 0;
-  border-radius: 12px;
-  background: #eee;
-  position: relative;
-  transition: left .2s ease-in-out;
-}
-
-.switch.on {
-  border: 1px solid #4da94f;
-  background: #5cb85c;
-}
-
-.switch.on .switch-toggle {
-  left: 23px;
-  border: 1px solid #b8ffb2;
-  background: #b8ffb2;
-}
-
-.switch.disabled {
-  cursor: not-allowed;
-}
+// The .switch class and related styles would be updated to use a Bootstrap 5 compatible switch or a custom one
 
 .down-arrow {
   user-select: none;
@@ -163,4 +136,8 @@
   border-right: 30px solid transparent;
   border-bottom: 0 solid transparent;
   border-left: 30px solid transparent;
+}
+
+.start-button-div {
+  margin-left: 25%;
 }

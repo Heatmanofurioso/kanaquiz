@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "react-toggle-switch/dist/css/switch.min.css";
+
+.card {
+  margin-bottom: 20px;
+}
+
 html {
   height: 100%; /* height sets are for android chrome background fix */
   min-height: 100%;
@@ -59,6 +65,7 @@ code {
 
 .game {
   padding-top: 70px;
+  max-width: 968px !important;
 }
 
 .glyphicon-none:before {

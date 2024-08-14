@@ -4,7 +4,16 @@ import {kanaDictionary} from '../../data/kanaDictionary';
 import './ChooseCharacters.scss';
 import CharacterGroup from './CharacterGroup';
 
-class ChooseCharacters extends Component<any, any> {
+interface IChooseCharactersProps {
+  selectedGroups?: any;
+  handleStartGame?: any;
+  stage?: any;
+  isLocked?: any;
+  lockStage?: any;
+}
+
+class ChooseCharacters extends Component<IChooseCharactersProps, any> {
+
   startRef: any;
   state: any = {
     errMsg: '',
@@ -53,7 +62,7 @@ class ChooseCharacters extends Component<any, any> {
   }
 
   isSelected(groupName: any) {
-    return this.getIndex(groupName) > -1 ? true : false;
+    return this.getIndex(groupName) > -1;
   }
 
   removeSelect(groupName: any) {
@@ -147,7 +156,7 @@ class ChooseCharacters extends Component<any, any> {
     return <div
       key={'alt_toggle_' + whichKana + postfix}
       onClick={() => this.toggleAlternative(whichKana, postfix)}
-      className="choose-row"
+      className="list-group-item"
     >
       <span
         className={checkBtn}
@@ -205,12 +214,12 @@ class ChooseCharacters extends Component<any, any> {
   makeDivs() {
     return Object.keys(kanaDictionary).map((kana: any) => {
       return (<div className="col-sm-6">
-        <div className="panel panel-default">
-          <div className="panel-heading">{kana}</div>
+        <div className="card">
+          <div className="card-header">{kana}</div>
           <div className="p-5 selection-areas">
             {this.showGroupRows(kana, this.state.showAlternatives.indexOf(kana) >= 0, this.state.showSimilars.indexOf(kana) >= 0)}
           </div>
-          <div className="panel-footer text-center">
+          <div className="card-footer text-center">
             <a href="#" onClick={() => this.selectAll(kana)}>All</a> &nbsp;&middot;&nbsp; <a
             href="#"
             onClick={() => this.selectNone(kana)}>None</a>
@@ -226,9 +235,9 @@ class ChooseCharacters extends Component<any, any> {
     return (
       <div className="choose-characters">
         <div className="">
-          <div className="col-xs-12">
-            <div className="panel panel-default">
-              <div className="p-5 welcome">
+          <div className="col-12">
+            <div className="card">
+              <div className="p-2 welcome">
                 <h4>Welcome to Kanji Pro!</h4>
                 <p>Please choose the groups of characters that you'd like to be studying.</p>
               </div>
@@ -237,20 +246,26 @@ class ChooseCharacters extends Component<any, any> {
         </div>
         <div className="">
           {this.makeDivs()}
-          <div className="col-sm-3 col-xs-12 pull-right">
-            <span className="pull-right lock">Lock to stage &nbsp;
-              {
-                this.props.isLocked &&
-                // @ts-ignore
-                <input className="stage-choice" type="number" min="1" max="5" maxLength="1" size="1"
-                       inputMode="numeric"
-                       onChange={(e) => this.props.lockStage(e.target.value, true)}
-                       value={this.props.stage}
-                />
-              }
-              <Switch onClick={() => this.props.lockStage(1)} on={this.props.isLocked}/></span>
+          <div className="col-sm-3 col-12 float-right">
+            <span className="float-right lock">
+              <div className="form-check">
+                {
+                  this.props.isLocked &&
+                <input  type="number" min="1" max="5" maxLength={1} size={1}
+                        inputMode="numeric"
+                        onChange={(e) => this.props.lockStage(e.target.value, true)}
+                        value={this.props.stage}/>
+                }
+                <label className="form-check-label" htmlFor="flexRadioCheckedDisabled">
+                  Lock to stage&nbsp;
+                </label>
+              </div>
+
+
+              <Switch className="form-switch-sm" onClick={() => this.props.lockStage(1)}
+                      on={this.props.isLocked}/></span>
           </div>
-          <div className="col-sm-offset-3 col-sm-6 col-xs-12 text-center">
+          <div className="col-sm-offset-3 col-sm-6 col-12 text-center start-button-div">
             {
               this.state.errMsg != '' &&
               <div className="error-message">{this.state.errMsg}</div>

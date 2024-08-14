@@ -1,56 +1,48 @@
-import React, {Component} from 'react';
+import React, { useState, useEffect } from 'react';
 
-class CharacterGroup extends Component<any, any> {
-  state = {shownChars: ''}
+const CharacterGroup = (props: any) => {
+  const [shownChars, setShownChars] = useState('');
 
-  changeShownChars(newString: string) {
-    this.setState({shownChars: newString})
-  }
+  const changeShownChars = (newString: any) => {
+    setShownChars(newString);
+  };
 
-  getShowableCharacters(whichKana: string) {
+  const getShowableCharacters = (whichKana: any) => {
     let strRomajiCharacters = '';
     let strKanaCharacters = '';
-    Object.keys(this.props.characters).map(character => {
-      const romajiString = this.props.characters[character].join('/')
+    Object.keys(props.characters).forEach((character) => {
+      const romajiString = props.characters[character].join('/');
       strRomajiCharacters += romajiString + ' · ';
       strKanaCharacters += character + ' · ';
     });
     strRomajiCharacters = strRomajiCharacters.slice(0, -2);
     strKanaCharacters = strKanaCharacters.slice(0, -2);
-    if (whichKana == 'romaji') {
-      return strRomajiCharacters;
-    } else {
-      return strKanaCharacters;
-    }
-  }
+    return whichKana === 'romaji' ? strRomajiCharacters : strKanaCharacters;
+  };
 
-  componentWillMount() {
-    this.changeShownChars(this.getShowableCharacters('romaji'));
-  }
+  useEffect(() => {
+    changeShownChars(getShowableCharacters('romaji'));
+  }, []); // Equivalent to `componentWillMount` in class components
 
-  render() {
-    return (
-      <div
-        className={
-          'choose-row'
-          + (this.props.groupName.endsWith('_a') || this.props.groupName.endsWith('_s') ? ' alt-row' : '')
-          + (['h_group16_a', 'k_group18_a', 'k_group29_a'].includes(this.props.groupName) ? ' divider-row' : '')
-        }
-        onClick={() => {
-          this.props.handleToggleSelect(this.props.groupName);
-          this.changeShownChars(this.getShowableCharacters('romaji'));
-        }}
-        onMouseEnter={() => this.changeShownChars(this.getShowableCharacters('kana'))}
-        onMouseLeave={() => this.changeShownChars(this.getShowableCharacters('romaji'))}
-        onTouchStart={() => this.changeShownChars(this.getShowableCharacters('kana'))}
-        onTouchEnd={() => this.changeShownChars(this.getShowableCharacters('romaji'))}
-      >
-      <span className={this.props.selected ?
-        'glyphicon glyphicon-small glyphicon-check' :
-        'glyphicon glyphicon-small glyphicon-unchecked'}></span> {this.state.shownChars}
-      </div>
-    );
-  }
-}
+  return (
+    <div
+      className={
+        'list-group-item' +
+        (props.groupName.endsWith('_a') || props.groupName.endsWith('_s') ? ' alt-row' : '') +
+        (['h_group16_a', 'k_group18_a', 'k_group29_a'].includes(props.groupName) ? ' divider-row' : '')
+      }
+      onClick={() => {
+        props.handleToggleSelect(props.groupName);
+        changeShownChars(getShowableCharacters('romaji'));
+      }}
+      onMouseEnter={() => changeShownChars(getShowableCharacters('kana'))}
+      onMouseLeave={() => changeShownChars(getShowableCharacters('romaji'))}
+      onTouchStart={() => changeShownChars(getShowableCharacters('kana'))}
+      onTouchEnd={() => changeShownChars(getShowableCharacters('romaji'))}
+    >
+      <span className={props.selected ? 'fas fa-check' : 'far fa-circle'}></span> {shownChars}
+    </div>
+  );
+};
 
 export default CharacterGroup;

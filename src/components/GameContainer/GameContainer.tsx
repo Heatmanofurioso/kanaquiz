@@ -1,62 +1,65 @@
-import React, {Component} from 'react';
+import React, { useState, useEffect } from 'react';
 import ChooseCharacters from '../ChooseCharacters/ChooseCharacters';
 import Game from '../Game/Game';
-import {sanitizeStage} from '../../data/helperFuncs';
+import { sanitizeStage } from '../../data/helperFuncs';
 
-class GameContainer extends Component<any, any> {
-  state = {
-    stage: 1,
-    isLocked: false,
-    decidedGroups: JSON.parse(localStorage.getItem('decidedGroups') || '[]') || []
-  }
+const GameContainer = (props: any) => {
+  const [stage, setStage] = useState(1);
+  const [isLocked, setIsLocked] = useState(false);
+  const [decidedGroups, setDecidedGroups] = useState(
+    JSON.parse(localStorage.getItem('decidedGroups') || '[]') || []
+  );
 
-  componentWillReceiveProps() {
-    if (!this.state.isLocked)
-      this.setState({stage: 1});
-  }
+  useEffect(() => {
+    if (!isLocked) {
+      setStage(1);
+    }
+  }, [props.gameState, isLocked]);
 
-  startGame = (decidedGroups: any) => {
-    this.setState({decidedGroups: decidedGroups});
+  const startGame = (decidedGroups: any) => {
+    setDecidedGroups(decidedGroups);
     localStorage.setItem('decidedGroups', JSON.stringify(decidedGroups));
-    this.props.handleStartGame();
-  }
+    props.handleStartGame();
+  };
 
-  stageUp = () => {
-    this.setState({stage: this.state.stage + 1});
-  }
+  const stageUp = () => {
+    setStage((prevStage) => prevStage + 1);
+  };
 
-  lockStage = (stage: any, forceLock: any) => {
-    stage = sanitizeStage(stage);
-    // if(stage<1 || stage>5) stage=1; // don't use this to allow backspace
-    if (forceLock)
-      this.setState({stage: stage, isLocked: true});
-    else
-      this.setState({stage: stage, isLocked: !this.state.isLocked});
-  }
+  const lockStage = (stage: any, forceLock: any) => {
+    const sanitizedStage = sanitizeStage(stage);
+    if (forceLock) {
+      setStage(sanitizedStage);
+      setIsLocked(true);
+    } else {
+      setStage(sanitizedStage);
+      setIsLocked((prevIsLocked) => !prevIsLocked);
+    }
+  };
 
-  render() {
-    return (
-      <div>
-        {this.props.gameState === 'chooseCharacters' &&
-          <ChooseCharacters selectedGroups={this.state.decidedGroups}
-                            handleStartGame={this.startGame}
-                            stage={this.state.stage}
-                            isLocked={this.state.isLocked}
-                            lockStage={this.lockStage}
-          />
-        }
-        {this.props.gameState === 'game' &&
-          <Game decidedGroups={this.state.decidedGroups}
-                handleEndGame={this.props.handleEndGame}
-                stageUp={this.stageUp}
-                stage={this.state.stage}
-                isLocked={this.state.isLocked}
-                lockStage={this.lockStage}
-          />
-        }
-      </div>
-    )
-  }
-}
+  return (
+    <div>
+      {props.gameState === 'chooseCharacters' && (
+        <ChooseCharacters
+          selectedGroups={decidedGroups}
+          handleStartGame={startGame}
+          stage={stage}
+          isLocked={isLocked}
+          lockStage={lockStage}
+        />
+      )}
+      {props.gameState === 'game' && (
+        <Game
+          decidedGroups={decidedGroups}
+          handleEndGame={props.handleEndGame}
+          stageUp={stageUp}
+          stage={stage}
+          isLocked={isLocked}
+          lockStage={lockStage}
+        />
+      )}
+    </div>
+  );
+};
 
 export default GameContainer;

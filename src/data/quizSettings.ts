@@ -1,4 +1,4 @@
-export const quizSettings = {
+export const quizSettings: any = {
   stageLength: {
     1: 20,
     2: 20,

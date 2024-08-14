@@ -41,6 +41,11 @@ class Question extends Component<any, any> {
   private askableKanas: any;
   private askableRomajis: any;
 
+  constructor(props: any) {
+    super(props);
+    this.initializeCharacters();
+  }
+
   getRandomKanas(amount: any, include: any, exclude: any) {
     let randomizedKanas = this.askableKanaKeys.slice();
 
@@ -197,7 +202,7 @@ class Question extends Component<any, any> {
   }
 
   getPreviousResult() {
-    let resultString: any = '';
+    let resultString: any;
     // console.log(this.previousAnswer);
     if (this.previousQuestion == '')
       resultString = <div className="previous-result none">Let's go! Which character is this?</div>
@@ -211,15 +216,15 @@ class Question extends Component<any, any> {
       if (this.state.previousAnswerWasCorrect)
         resultString = (
           <div className="previous-result correct" title="Correct answer!">
-            <span className="pull-left glyphicon glyphicon-none"></span>{rightAnswer}<span
-            className="pull-right glyphicon glyphicon-ok"></span>
+            <span className="float-left glyphicon glyphicon-none"></span>{rightAnswer}<span
+            className="float-right glyphicon glyphicon-ok"></span>
           </div>
         );
       else
         resultString = (
           <div className="previous-result wrong" title="Wrong answer!">
-            <span className="pull-left glyphicon glyphicon-none"></span>{rightAnswer}<span
-            className="pull-right glyphicon glyphicon-remove"></span>
+            <span className="float-left glyphicon glyphicon-none"></span>{rightAnswer}<span
+            className="float-right glyphicon glyphicon-remove"></span>
             <br/>
             <span className="previous-answer">(You answered: {this.previousAnswer})</span>
           </div>
@@ -231,9 +236,7 @@ class Question extends Component<any, any> {
   isInAllowedAnswers(previousAnswer: any) {
     console.log(previousAnswer);
     console.log(this.allowedAnswers);
-    if (arrayContains(previousAnswer, this.previousAllowedAnswers))
-      return true;
-    else return false;
+    return arrayContains(previousAnswer, this.previousAllowedAnswers);
   }
 
   handleAnswerChange = (e: any) => {
@@ -248,16 +251,12 @@ class Question extends Component<any, any> {
     }
   }
 
-  componentWillMount() {
-    this.initializeCharacters();
-  }
-
   componentDidMount() {
     this.setNewQuestion();
   }
 
   render() {
-    let btnClass = "btn btn-default answer-button";
+    let btnClass = "btn btn-secondary answer-button";
     if ('ontouchstart' in window)
       btnClass += " no-hover"; // disables hover effect on touch screens
     // @ts-ignore
@@ -265,7 +264,7 @@ class Question extends Component<any, any> {
     let stageProgressPercentageStyle = {width: stageProgressPercentage}
     // @ts-ignore
     return (
-      <div className="text-center question col-xs-12">
+      <div className="text-center question col-12">
         {this.getPreviousResult()}
         <div className="big-character">{this.getShowableQuestion()}</div>
         <div className="answer-container">
@@ -291,8 +290,7 @@ class Question extends Component<any, any> {
           <div className="progress-bar progress-bar-info"
                role="progressbar"
                aria-valuenow={this.state.stageProgress}
-               aria-valuemin="0"
-            // @ts-ignore
+               aria-valuemin={0}
                aria-valuemax={quizSettings.stageLength[this.props.stage]}
                style={stageProgressPercentageStyle}
           >

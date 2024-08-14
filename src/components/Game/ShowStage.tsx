@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './ShowStage.scss';
-// @ts-ignore
 import {CSSTransition} from 'react-transition-group';
 
 class ShowStage extends Component<any, any> {

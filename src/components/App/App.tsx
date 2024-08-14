@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.scss';
 import Navbar from '../Navbar/Navbar';
 import GameContainer from '../GameContainer/GameContainer';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const options = {};
 

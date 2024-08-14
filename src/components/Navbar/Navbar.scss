@@ -1,21 +1,64 @@
+@import 'bootstrap/scss/bootstrap'; // Assuming you're using SASS
+
+.navbar {
+  &-dark.bg-dark {
+    background-color: #333;
+  }
+
+  .navbar-nav {
+    .nav-item {
+      .nav-link {
+        color: #fff !important;
+
+        &:hover {
+          color: #bbb !important;
+        }
+      }
+    }
+  }
+
+  .navbar-text {
+    color: #fff !important;
+    cursor: default;
+    margin-bottom: 0;
+  }
+}
+
+// Update media queries to use Bootstrap 5 breakpoints
+@include media-breakpoint-down(sm) {
+  .navbar-nav {
+    .nav-item {
+      font-size: 1.0em;
+    }
+  }
+}
+
+// Replace glyphicon with Font Awesome or SVG icons
+// Example using Font Awesome
+.fas.fa-arrow-left {
+  font-size: 0.9em;
+  color: #d9534f;
+}
+
+// Custom styles
 #navbar ul li {
   font-size: 1.2em;
-  @media (max-width: 768px) {
+  @include media-breakpoint-down(sm) {
     font-size: 1.0em;
   }
 
-  .glyphicon {
+  .fas {
     font-size: 0.9em;
     color: #d9534f;
   }
 }
 
-.navbar-inverse {
+.navbar-dark.bg-dark {
   background-color: #333;
 }
 
-.hidden-nano {
-  @media (max-width: 390px) {
+@include media-breakpoint-down(col) {
+  .hidden-nano {
     display: none;
   }
 }
@@ -34,45 +77,13 @@
   margin-bottom: 0;
 }
 
-#nav-kanaquiz a:hover {
-  cursor: default;
-}
-
-// From http://getbootstrap.com/examples/non-responsive/non-responsive.css
-.container .navbar-header,
-.container .navbar-collapse {
-  margin-right: 0;
-  margin-left: 0;
-}
-
-/* Always float the navbar header */
-.navbar-header {
-  float: left;
-}
-
-/* Undo the collapsing navbar */
-.navbar-collapse {
-  display: block !important;
-  height: auto !important;
-  padding-bottom: 0;
-  overflow: visible !important;
-}
-
-.navbar-toggle {
+// Bootstrap 5 no longer uses jQuery for the collapse plugin, so data attributes are prefixed with 'data-bs-'
+// The 'navbar-toggler' now controls the 'navbar-collapse' without jQuery
+.navbar-toggler {
   display: none;
 }
 
-.navbar-collapse {
-  border-top: 0;
-}
-
-.navbar-brand {
-  margin-left: -15px;
-}
-
-/* Always apply the floated nav */
 .navbar-nav {
-  float: left;
   margin: 0;
 }
 
@@ -84,40 +95,35 @@
   padding: 15px;
 }
 
-/* Redeclare since we override the float above */
 .navbar-nav.navbar-right {
   float: right;
 }
 
-/* Undo custom dropdowns */
-.navbar .navbar-nav .open .dropdown-menu {
+// Dropdown menu styles for Bootstrap 5
+.navbar .navbar-nav .dropdown-menu {
   position: absolute;
-  float: left;
   background-color: #fff;
-  border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, .15);
-  border-width: 0 1px 1px;
-  border-radius: 0 0 4px 4px;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+  border-radius: 0.25rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .15);
 }
 
-.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+.navbar-dark .navbar-nav .dropdown-menu > li > a {
   color: #333;
 }
 
-.navbar .navbar-nav .open .dropdown-menu > li > a:hover,
-.navbar .navbar-nav .open .dropdown-menu > li > a:focus,
-.navbar .navbar-nav .open .dropdown-menu > .active > a,
-.navbar .navbar-nav .open .dropdown-menu > .active > a:hover,
-.navbar .navbar-nav .open .dropdown-menu > .active > a:focus {
+.navbar-dark .navbar-nav .dropdown-menu > li > a:hover,
+.navbar-dark .navbar-nav .dropdown-menu > li > a:focus,
+.navbar-dark .navbar-nav .dropdown-menu > .active > a,
+.navbar-dark .navbar-nav .dropdown-menu > .active > a:hover,
+.navbar-dark .navbar-nav .dropdown-menu > .active > a:focus {
   color: #fff !important;
-  background-color: #428bca !important;
+  background-color: #0d6efd !important; // Updated to use Bootstrap 5's blue color
 }
 
-.navbar .navbar-nav .open .dropdown-menu > .disabled > a,
-.navbar .navbar-nav .open .dropdown-menu > .disabled > a:hover,
-.navbar .navbar-nav .open .dropdown-menu > .disabled > a:focus {
-  color: #999 !important;
+.navbar-dark .navbar-nav .dropdown-menu > .disabled > a,
+.navbar-dark .navbar-nav .dropdown-menu > .disabled > a:hover,
+.navbar-dark .navbar-nav .dropdown-menu > .disabled > a:focus {
+  color: #6c757d !important; // Updated to use Bootstrap 5's disabled color
   background-color: transparent !important;
 }

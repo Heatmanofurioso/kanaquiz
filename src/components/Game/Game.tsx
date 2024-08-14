@@ -2,10 +2,20 @@ import React, {Component} from 'react';
 import ShowStage from './ShowStage';
 import Question from './Question';
 
-class Game extends Component<any, any> {
-  state = {showScreen: ''}
+interface IGameProps {
+  mapOptions?: any;
+  stageUp?: any;
+  lockStage?: any;
+  handleEndGame?: any;
+  stage?: any;
+  isLocked?: any;
+  decidedGroups?: any;
+}
 
-  componentWillMount() {
+class Game extends Component<IGameProps, any> {
+  state = {showScreen: 'stage'}
+
+  componentDidMount() {
     this.setState({showScreen: 'stage'});
   }
 

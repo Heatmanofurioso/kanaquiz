@@ -1,8 +1,10 @@
-export function arrayContains(needle, haystack) {
-  return (haystack.indexOf(needle) > -1) ? true : false;
+import {STAGE_FIRST, STAGE_LAST} from "./quizSettings";
+
+export function arrayContains(needle: any, haystack: any) {
+  return (haystack.indexOf(needle) > -1);
 }
 
-export function removeFromArray(needle, haystack) {
+export function removeFromArray(needle: any, haystack: any) {
   if (typeof needle === 'object')
     needle = needle[0];
 
@@ -12,8 +14,8 @@ export function removeFromArray(needle, haystack) {
   return haystack;
 }
 
-export function findRomajisAtKanaKey(needle, kanaDictionary) {
-  let romaji = [];
+export function findRomajisAtKanaKey(needle: any, kanaDictionary: any) {
+  let romaji: any = [];
   Object.keys(kanaDictionary).forEach(function (whichKana) {
     // console.log(whichKana); // 'hiragana' or 'katakana'
     Object.keys(kanaDictionary[whichKana]).forEach(function (groupName) {
@@ -23,9 +25,9 @@ export function findRomajisAtKanaKey(needle, kanaDictionary) {
           // console.log(kanaDictionary[whichKana][groupName]['characters'][key]);
           romaji = kanaDictionary[whichKana][groupName]['characters'][key];
         }
-      }, this);
-    }, this);
-  }, this);
+      });
+    });
+  });
   // console.log(romaji);
   return romaji;
 }
@@ -44,7 +46,7 @@ export function findRomajisAtKanaKey(needle, kanaDictionary) {
 //     return type;
 // }
 
-export function shuffle(array) {
+export function shuffle(array: any) {
   let i = 0
     , j = 0
     , temp = null;
@@ -64,11 +66,11 @@ export function removeHash() {
 
 }
 
-export function getRandomFromArray(arr) {
+export function getRandomFromArray(arr: any) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-export function cartesianProduct(elements) {
+export function cartesianProduct(elements: any) {
   if (!Array.isArray(elements)) {
     throw new TypeError();
   }
@@ -76,7 +78,7 @@ export function cartesianProduct(elements) {
   const end = elements.length - 1,
     result = [];
 
-  function addTo(curr, start) {
+  function addTo(curr: any, start: any) {
     const first = elements[start],
       last = (start === end);
 
@@ -100,12 +102,12 @@ export function cartesianProduct(elements) {
   return result;
 }
 
-export function intersection(a, b) {
+export function intersection(a: any, b: any) {
   const setA = new Set(a);
-  return b.filter(value => setA.has(value));
+  return b.filter((value: any) => setA.has(value));
 }
 
-export const sanitizeStage = (stage) => {
+export const sanitizeStage = (stage: any) => {
   if (parseInt(stage) < 1 || isNaN(parseInt(stage))) {
     return STAGE_FIRST;
   } else if (parseInt(stage) > 5) {
