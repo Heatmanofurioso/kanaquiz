@@ -251,7 +251,7 @@ class ChooseCharacters extends Component<IChooseCharactersProps, any> {
               <div className="form-check">
                 {
                   this.props.isLocked &&
-                <input  type="number" min="1" max="5" maxLength={1} size={1}
+                <input  type="number" min="1" max="5"
                         inputMode="numeric"
                         onChange={(e) => this.props.lockStage(e.target.value, true)}
                         value={this.props.stage}/>
